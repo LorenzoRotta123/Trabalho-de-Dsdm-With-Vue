@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Feed With VueJS</title>
+	<script src="https://unpkg.com/vue"></script>
+	<link rel="stylesheet" type="text/css" href="trabDsdmVue.css">
+</head>
+<body>
+
+	<center>
+		<h1 id="titleFeed"> Tweets </h1>
+
+	<div id="tudo">
+
+		<div id="escrever">
+			<input type="text" placeholder="Nome de seu usuário" v-model="usuario" id="caixaTextoUser">
+			<input type="text" placeholder="O que irá escrever no seu post?" v-model="caixaTexto" id="caixaTextoPost">
+			<button v-on:click="postarMensagem()" id="postBtn">Tweetar</button>
+			
+		<div v-for="tweet in posts">
+			<p id="userandPost"> <br> {{ tweet.usuario }}: <br> <br>{{ tweet.caixaTexto }} {{ tweet.time }}</p>
+			<p id="contLike">Likes: {{ likeCont }}</p>
+			<button v-on:click="like()" id="likeBtn">Like</button>
+			<button v-on:click="dislike()" id="dislikeBtn">Dislike</button>
+			<p id="contDislike">Dislikes: {{ dislikeCont }}</p>
+			<br>
+			<br>
+			<br>
+		</div>
+
+		</div>
+
+	</div>
+	</center>
+
+	<script>
+		
+		new Vue({
+  			el: "#escrever",
+  			data: {
+  				likeCont: 0,
+  				dislikeCont: 0,
+  				usuario: "",
+  				caixaTexto: "",
+		    	posts: [
+
+		    	],
+  			},
+  			methods: {
+
+  				like: function() {
+  					this.likeCont++;
+  				},
+
+  				dislike: function() {
+  					this.dislikeCont++;
+  				},
+
+  				postarMensagem: function() {
+  					var time = new Date().toLocaleString();
+  					var newTweet = {
+  						usuario: this.usuario,
+  						caixaTexto: this.caixaTexto,
+  						time: this.time,
+  					};
+
+  					this.posts.push(newTweet);
+  					
+  				},
+	
+  			} 			
+				});
+
+			
+	</script>
+
+</body>
+</html>
